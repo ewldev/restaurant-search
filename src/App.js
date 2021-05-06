@@ -11,7 +11,9 @@ import './App.css';
 
 const initialState = {
   input: '',
+  input2: '',
   searchParams: '',
+  searchParams2: '',
   box: {},
   route: 'home',
   // route: 'signin',
@@ -60,18 +62,20 @@ class App extends Component {
 
   onInputChange = (event) => {
     this.setState({input: event.target.value});
-    console.log('input', this.state.input);
+  }
+
+  onInputChange2 = (event) => {
+    this.setState({input2: event.target.value});
   }
 
   onButtonSubmit = () => {
     this.setState({searchParams: this.state.input});
-    console.log('searchParams', this.state.searchParams);
-      
       fetch('http://localhost:3000/search', {
         method: 'post',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
-          input: this.state.input
+          input: this.state.input,
+          input2: this.state.input2
         })
       })
       .then(response => response.json())
@@ -118,6 +122,7 @@ class App extends Component {
               />
               <ImageLinkForm
                 onInputChange={this.onInputChange}
+                onInputChange2={this.onInputChange2}
                 onButtonSubmit={this.onButtonSubmit}
               />
               <FaceRecognition box={box} searchParams={searchParams} />
