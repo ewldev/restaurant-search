@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 // import Particles from 'react-particles-js';
-import FaceRecognition from './components/FaceRecognition/FaceRecognition';
+import CardList from '../components/CardList';
 import Navigation from './components/Navigation/Navigation';
 import Signin from './components/Signin/Signin';
 import Register from './components/Register/Register';
 // import Logo from './components/Logo/Logo';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
-import Rank from './components/Rank/Rank';
 import './App.css';
 
 const initialState = {
@@ -14,7 +13,7 @@ const initialState = {
   input2: '',
   searchParams: '',
   searchParams2: '',
-  box: {},
+  stores: [],
   route: 'home',
   // route: 'signin',
   isSignedIn: false,
@@ -22,7 +21,6 @@ const initialState = {
     id: '',
     name: '',
     email: '',
-    entries: 0,
     joined: ''
   }
 }
@@ -38,7 +36,6 @@ class App extends Component {
       id: data.id,
       name: data.name,
       email: data.email,
-      entries: data.entries,
       joined: data.joined
     }})
   }
@@ -79,24 +76,7 @@ class App extends Component {
         })
       })
       .then(response => response.json())
-      .then(response => {
-        if (response) {
-          fetch('http://localhost:3000/image', {
-            method: 'put',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-              id: this.state.user.id
-            })
-          })
-            .then(response => response.json())
-            .then(count => {
-              this.setState(Object.assign(this.state.user, { entries: count}))
-            })
-            .catch(console.log)
-
-        }
-        // this.displayFaceBox(this.calculateFaceLocation(response))
-      })
+      .then(response => {this.setState({ stores: response.data.businesses})})          
       .catch(err => console.log(err));
   }
 
@@ -110,22 +90,21 @@ class App extends Component {
   }
 
   render() {
-    const { isSignedIn, searchParams, route, box } = this.state;
+    const { isSignedIn, route } = this.state;
+    const filteredStores = stores.filter(store => {
+      return store.name.toLowerCase().includes(searchField.toLowerCase());
+    })
     return (
       <div className="App">
         <Navigation isSignedIn={isSignedIn} onRouteChange={this.onRouteChange} />
         { route === 'home'
           ? <div>
-              <Rank
-                name={this.state.user.name}
-                entries={this.state.user.entries}
-              />
               <ImageLinkForm
                 onInputChange={this.onInputChange}
                 onInputChange2={this.onInputChange2}
                 onButtonSubmit={this.onButtonSubmit}
               />
-              <FaceRecognition box={box} searchParams={searchParams} />
+              <CardList stores={filteredStores} />
             </div>
           : (
              route === 'signin'
