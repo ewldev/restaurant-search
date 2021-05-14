@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
-// import Particles from 'react-particles-js';
-import CardList from '../components/CardList';
+import CardList from './components/Card/CardList';
 import Navigation from './components/Navigation/Navigation';
 import Signin from './components/Signin/Signin';
 import Register from './components/Register/Register';
-// import Logo from './components/Logo/Logo';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import './App.css';
 
 const initialState = {
   input: '',
   input2: '',
-  searchParams: '',
-  searchParams2: '',
   stores: [],
   route: 'home',
   // route: 'signin',
@@ -40,23 +36,6 @@ class App extends Component {
     }})
   }
 
-  // calculateFaceLocation = (data) => {
-  //   const clarifaiFace = data.outputs[0].data.regions[0].region_info.bounding_box;
-  //   const image = document.getElementById('inputimage');
-  //   const width = Number(image.width);
-  //   const height = Number(image.height);
-  //   return {
-  //     leftCol: clarifaiFace.left_col * width,
-  //     topRow: clarifaiFace.top_row * height,
-  //     rightCol: width - (clarifaiFace.right_col * width),
-  //     bottomRow: height - (clarifaiFace.bottom_row * height)
-  //   }
-  // }
-
-  displayFaceBox = (box) => {
-    this.setState({box: box});
-  }
-
   onInputChange = (event) => {
     this.setState({input: event.target.value});
   }
@@ -66,7 +45,7 @@ class App extends Component {
   }
 
   onButtonSubmit = () => {
-    this.setState({searchParams: this.state.input});
+    // this.setState({searchParams: this.state.input});
       fetch('http://localhost:3000/search', {
         method: 'post',
         headers: {'Content-Type': 'application/json'},
@@ -75,9 +54,9 @@ class App extends Component {
           input2: this.state.input2
         })
       })
-      .then(response => response.json())
-      .then(response => {this.setState({ stores: response.data.businesses})})          
-      .catch(err => console.log(err));
+      .then(response => response.json())      
+      .then(data => {this.setState({ stores: data})}) 
+      .catch(err => console.log(err))      
   }
 
   onRouteChange = (route) => {
@@ -90,10 +69,12 @@ class App extends Component {
   }
 
   render() {
-    const { isSignedIn, route } = this.state;
-    const filteredStores = stores.filter(store => {
-      return store.name.toLowerCase().includes(searchField.toLowerCase());
-    })
+    const { stores, isSignedIn, route } = this.state;
+    // const { stores, searchField, isSignedIn, route } = this.state;
+    // const filteredStores = stores.filter(store => {
+    //   return store.name.toLowerCase().includes(searchField.toLowerCase());
+    // })
+    console.log('stores',stores);
     return (
       <div className="App">
         <Navigation isSignedIn={isSignedIn} onRouteChange={this.onRouteChange} />
@@ -104,7 +85,7 @@ class App extends Component {
                 onInputChange2={this.onInputChange2}
                 onButtonSubmit={this.onButtonSubmit}
               />
-              <CardList stores={filteredStores} />
+              <CardList stores={stores} />
             </div>
           : (
              route === 'signin'
