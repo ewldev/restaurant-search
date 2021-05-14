@@ -21,7 +21,7 @@ const ImageLinkForm = ({ onInputChange, onInputChange2, onButtonSubmit }) => {
                  placeholder='type of cuisine, restaurant name or street name'
                  onChange={onInputChange2}/>  
           <button
-            className='w-28 grow f4 link ph3 pv2 dib white bg-light-purple'
+            className='w-28 grow f4 link ph3 pv2 dib white bg-light-red'
             onClick={onButtonSubmit}
           >Search</button>
         </div>

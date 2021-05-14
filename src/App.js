@@ -77,7 +77,7 @@ class App extends Component {
     console.log('stores',stores);
     return (
       <div className="App">
-        <Navigation isSignedIn={isSignedIn} onRouteChange={this.onRouteChange} />
+        <Navigation isSignedIn={isSignedIn} onRouteChange={this.onRouteChange} />        
         { route === 'home'
           ? <div>
               <ImageLinkForm
