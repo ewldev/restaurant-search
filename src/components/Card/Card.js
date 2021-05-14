@@ -3,7 +3,7 @@ import './card.css';
 
 const Card = ({ image, name, cuisine, address, city, phone, rating }) => {
   return (
-    <div className='card tc grow bg-light-green br3 pa3 ma2 dib bw2 shadow-5'>
+    <div className='card tc bg-light-red br3 pa3 ma2 dib bw2 shadow-5'>
       <img alt="" src={image} height="200" width="200"/>
       <div>
         <h2>{name}</h2>

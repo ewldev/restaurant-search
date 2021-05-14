@@ -4,8 +4,11 @@ import './ImageLinkForm.css';
 const ImageLinkForm = ({ onInputChange, onInputChange2, onButtonSubmit }) => {
   return (
     <div>
+      <p className='f1'>
+        {'Feeling hungry?'}
+      </p>
       <p className='f3'>
-        {'Feeling hungry? Please enter your area and type of food you are looking for'}
+        {'Please enter your area and type of food you are looking for'}
       </p>
       <div className='center'>
         <div className='form pa4 br3 shadow-5'>
@@ -15,7 +18,7 @@ const ImageLinkForm = ({ onInputChange, onInputChange2, onButtonSubmit }) => {
                   onChange={onInputChange}/>
           <input className='f4 pa2 w-80'
                  type='text'
-                 placeholder='type of cuisine, restaurant name or street'
+                 placeholder='type of cuisine, restaurant name or street name'
                  onChange={onInputChange2}/>  
           <button
             className='w-28 grow f4 link ph3 pv2 dib white bg-light-purple'
