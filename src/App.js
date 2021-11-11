@@ -74,7 +74,7 @@ class App extends Component {
     // const filteredStores = stores.filter(store => {
     //   return store.name.toLowerCase().includes(searchField.toLowerCase());
     // })
-    console.log('stores',stores);
+    // console.log('stores',stores);
     return (
       <div className="App">
         {// <Navigation isSignedIn={isSignedIn} onRouteChange={this.onRouteChange}/>}        
