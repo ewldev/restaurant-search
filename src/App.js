@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import CardList from './components/Card/CardList';
-import Navigation from './components/Navigation/Navigation';
-import Signin from './components/Signin/Signin';
-import Register from './components/Register/Register';
+// import Navigation from './components/Navigation/Navigation';
+// import Signin from './components/Signin/Signin';
+// import Register from './components/Register/Register';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import './App.css';
 
@@ -69,7 +69,7 @@ class App extends Component {
   }
 
   render() {
-    const { stores, isSignedIn, route } = this.state;
+    const { stores } = this.state;
     // const { stores, searchField, isSignedIn, route } = this.state;
     // const filteredStores = stores.filter(store => {
     //   return store.name.toLowerCase().includes(searchField.toLowerCase());
@@ -77,9 +77,10 @@ class App extends Component {
     console.log('stores',stores);
     return (
       <div className="App">
-        <Navigation isSignedIn={isSignedIn} onRouteChange={this.onRouteChange} />        
-        { route === 'home'
-          ? <div>
+        {// <Navigation isSignedIn={isSignedIn} onRouteChange={this.onRouteChange}/>}        
+        // route === 'home'
+          // ? <div>
+          <div>
               <ImageLinkForm
                 onInputChange={this.onInputChange}
                 onInputChange2={this.onInputChange2}
@@ -87,11 +88,11 @@ class App extends Component {
               />
               <CardList stores={stores} />
             </div>
-          : (
-             route === 'signin'
-             ? <Signin loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
-             : <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
-            )
+          // : (
+          //    route === 'signin'
+          //    ? <Signin loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
+          //    : <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
+          //   )
         }
       </div>
     );
