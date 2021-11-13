@@ -8,6 +8,7 @@ const CardList = ({ stores }) => {
         stores.map((user, i) => {
           return (
             <Card
+              key={i}
               image={stores[i].image_url}
               name={stores[i].name}
               cuisine={stores[i].categories[0].title}
